@@ -31,7 +31,7 @@ public:
 	bool enleverCreature(const string& nom); // A MODIFIER... (si necessaire)
 	bool operator==(const Dresseur&dresseur) const;
 	bool operator==(const string&nom)const;
-	friend operator==();
+	friend bool operator==(const string&nom,const Dresseur&dresseur);
 	friend ostream&operator<<(ostream&os,const Dresseur&dresseur); // A COMPLETER... (si necessaire)
 
 private:
