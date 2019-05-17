@@ -11,6 +11,8 @@ public:
 	Pouvoir();
 	Pouvoir(const string& nom, 
 		unsigned int nombreDeDegat, unsigned int energieNecessaire);
+	Pouvoir(const Pouvoir&pouvoir);
+
 	~Pouvoir();
 
 	unsigned int obtenirNombreDeDegat() const;
@@ -21,9 +23,11 @@ public:
 	void modifierEnergieNecessarie(unsigned int energieNecessaire);
 	void modifierNom(const string& nom);
 
-	void description() const; // A MODIFIER... (si necessaire)
+	friend ostream&operator<<(ostream&o,const Pouvoir&pouvoir); // A MODIFIER... (si necessaire)
 
 	//________TP2________
+	Pouvoir operator=(const Pouvoir&pouvoir);
+	bool operator==(const Pouvoir&pouvoir);
 
 private:
 	string nom_;
