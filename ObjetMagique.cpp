@@ -35,7 +35,8 @@ void ObjetMagique::modifierBonus(int bonus)
 	bonus_ = bonus;
 }
 
-void ObjetMagique::affichage() const // A MODIFIER... (si necessaire)
+ostream & operator<<(ostream & o, const ObjetMagique & objet)
 {
-	cout << "l'objet " << nom_ << "fournit un bonus de " << bonus_ << endl;
+	o << "l'objet " << objet.obtenirNom() << "fournit un bonus de " << objet.obtenirBonus() << endl;
+	return o;
 }
