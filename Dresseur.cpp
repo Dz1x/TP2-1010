@@ -25,7 +25,7 @@ Dresseur::~Dresseur() // A MODIFIER... (si necessaire)
 Creature * Dresseur::obtenirUneCreature(const string & nom) const
 {
 	for (Creature* i : creatures_) {
-		if (i->obtenirNom == nom) {
+		if (i->operator==(nom)) {
 			return i;
 		}
 	}
@@ -154,9 +154,14 @@ bool Dresseur::operator==(const string&nom)const {
 
 // ___TP2___
 
+bool operator==(const string & nom, const Dresseur & dresseur) 
+{
+	return dresseur == nom;
+}
+
 ostream & operator<<(ostream & os, const Dresseur & dresseur)
 {
-	// TODO: insérer une instruction return ici
+	// TODO: insÃ©rer une instruction return ici
 	os << dresseur.obtenirNom() << " possede " << dresseur.obtenirNombreCreatures()
 	   << " creatures et appartient a l'equipe de " << dresseur.obtenirNomEquipe() << endl;
 
