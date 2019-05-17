@@ -18,7 +18,7 @@ public:
 	void modifierNom(const string& nom);
 	void modifierBonus(int bonus);
 
-	void affichage() const; // A MODIFIER... (si necessaire)
+	friend ostream&operator<<(ostream&o,const ObjetMagique&objet); // A MODIFIER... (si necessaire)
 
 private:
 	string nom_;
