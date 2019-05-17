@@ -13,7 +13,7 @@ public:
 	Creature(const string& nom, unsigned int attaque, 
 		unsigned int defense, unsigned int pointDeVie, unsigned int energie); // A COMPLETER... (si necessaire)
 	~Creature(); // A MODIFIER... (si necessaire)
-	
+	Creature(const Creature&creature);
 	string obtenirNom() const;
 	unsigned int obtenirAttaque() const;
 	unsigned int obtenirDefense() const;
@@ -25,9 +25,14 @@ public:
 	unsigned int obtenirExperienceNecessaire() const;
 	unsigned int obtenirNiveau() const;
 	bool operator==(const Creature&creature) const;
-	Pouvoir obtenirPouvoirs() const; // A MODIFIER... (si necessaire)
+	bool operator==(const string&nom) const;
+	Creature operator=(const Creature&creature);
+	
+	void apprendrePouvoir( Pouvoir* pouvoir);
+	bool oublierPouvoir(Pouvoir*pouvoir);
+	vector<Pouvoir*> obtenirPouvoirs() const; // A MODIFIER... (si necessaire)
 
-	void attaquer(Creature& creature);// A MODIFIER... (si necessaire)
+	void attaquer(Creature& creature,const Pouvoir&pouvoir);// A MODIFIER... (si necessaire)
 	int experienceGagnee(const Creature& creature);
 	
 	void modifierAttaque(unsigned int attaque);
@@ -36,10 +41,10 @@ public:
 	void modifierEnergie(unsigned int energie);
 	void modifierExperience(unsigned int experience);
 	void modifierNiveau(unsigned int niveau);
-	void modifierPouvoirs(const Pouvoir& pouvoirs); // A MODIFIER... (si necessaire)
+	void modifierPouvoirs(const vector<Pouvoir*>& pouvoirs); // A MODIFIER... (si necessaire)
 
-	void information() const; // A MODIFIER... (si necessaire)
-
+	friend bool operator==(const Creature&creature, const std::string&nom);
+	friend ostream&operator<<(ostream&o, const Creature&creature);
 	// _________TP2___________
 
 private:
