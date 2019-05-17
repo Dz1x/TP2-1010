@@ -12,6 +12,11 @@ Pouvoir::Pouvoir(const string& nom,
 {
 }
 
+Pouvoir::Pouvoir(const Pouvoir&pouvoir) {
+	nom_ = pouvoir.obtenirNom();
+	nombreDeDegat_ = pouvoir.obtenirNombreDeDegat();
+	energieNecessaire_ = pouvoir.obtenirEnergieNecessaire();
+}
 
 Pouvoir::~Pouvoir()
 {
@@ -47,7 +52,26 @@ void Pouvoir::modifierNom(const string& nom)
 	nom_ = nom;
 }
 
-void Pouvoir::description() const // A MODIFIER... (si necessaire)
+ ostream&operator<<(ostream&o, const Pouvoir&pouvoir)// A MODIFIER... (si necessaire)
 {
-	cout << nom_ << " necessite " << energieNecessaire_ << " energie et inflige " << nombreDeDegat_ << " degats" << endl;
+	o<< pouvoir.obtenirNom() << " necessite " << pouvoir.obtenirEnergieNecessaire() << " energie et inflige " << pouvoir.obtenirNombreDeDegat() << " degats" << endl;
+	return o;
+}
+
+Pouvoir Pouvoir::operator=(const Pouvoir & pouvoir)
+{
+	if (this != &pouvoir) {
+		nom_ = pouvoir.obtenirNom();
+		nombreDeDegat_ = pouvoir.obtenirNombreDeDegat();
+		energieNecessaire_ = pouvoir.obtenirEnergieNecessaire();
+	}
+	return *this;
+}
+
+bool Pouvoir::operator==(const Pouvoir & pouvoir)
+{
+	if (nom_ == pouvoir.obtenirNom()) {
+		return true;
+	}
+	return false;
 }
