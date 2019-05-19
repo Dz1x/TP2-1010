@@ -49,9 +49,10 @@ bool PolyLand::operator==(const Dresseur& dresseur) const{ // À faire
 	return true;
 }
 
-// À faire
-PolyLand& PolyLand::operator+=(const Dresseur& dresseur) const {
-
+// done
+PolyLand PolyLand::operator+=(const Dresseur& dresseur)  {
+	this->ajouterDresseur(dresseur);
+	return *this;
 }
 
 // Is done
@@ -66,7 +67,7 @@ bool PolyLand::ajouterCreature(const Creature& creature) // A MODIFIER... (si ne
 	return true;
 }
 
-// id done
+// is done
 bool PolyLand::operator==(const Creature& creature) const { // À faire
 	for (Creature* creatureDansVecteur : creatures_) {
 		if (creatureDansVecteur->obtenirNom() == creature.obtenirNom()) {
@@ -76,10 +77,11 @@ bool PolyLand::operator==(const Creature& creature) const { // À faire
 	return true;
 }
 
-// À faire
-PolyLand& PolyLand::operator+=(const Creature& creature) const {
+//is done
+PolyLand PolyLand::operator+=(const Creature& creature)  {
 	
-
+	this->ajouterCreature(creature);
+	return *this;
 
 }
 
@@ -87,7 +89,7 @@ PolyLand& PolyLand::operator+=(const Creature& creature) const {
 bool PolyLand::retirerDresseur(const string& nom) // A MODIFIER... (si necessaire)
 {
 	for (Dresseur* dresseurDansVecteur : dresseurs_) {
-		if (dresseurDansVecteur->obtenirNom == nom) {
+		if (*dresseurDansVecteur == nom) {
 			dresseurDansVecteur = dresseurs_[dresseurs_.size() - 1];
 			dresseurs_.pop_back;
 			return true;
@@ -96,8 +98,10 @@ bool PolyLand::retirerDresseur(const string& nom) // A MODIFIER... (si necessair
 	return false;
 }
 
-// À faire
-PolyLand& PolyLand::operator-=(const Dresseur& dresseur) const {
+// is done
+PolyLand PolyLand::operator-=(const Dresseur& dresseur)  {
+	this->retirerDresseur(dresseur.obtenirNom());
+	return *this;
 
 }
 
@@ -116,8 +120,12 @@ bool PolyLand::retirerCreature(const string& nom) // A MODIFIER... (si necessair
 	return false;
 }
 
-// À faire
-PolyLand& PolyLand::operator-=(const Creature& creature) const {
+// is done
+PolyLand PolyLand::operator-=(const Creature& creature)  {
+
+	this->retirerCreature(creature.obtenirNom());
+	return *this;
+
 
 }
 
@@ -163,15 +171,17 @@ bool PolyLand::relacherCreature(Dresseur* dresseur, const string& nomCreature)
 ostream& operator<<(ostream& os, const PolyLand& polyLand) // A MODIFIER... (si necessaire)
 {
 	// A finir de là
-	cout << "INFORMATION SUR POLYLAND" << endl;
+	os << "INFORMATION SUR POLYLAND" << endl;
+
+
 	for (Dresseur* dresseur: polyLand.dresseurs_) {
-		cout << dresseur;
+		os << dresseur;
 	}
 
-	cout << endl;
+	os << endl;
 
 	for (Creature* creature : polyLand.creatures_) {
-		cout << creature;
+		os << creature;
 	}
 
 	// Le return est bon
