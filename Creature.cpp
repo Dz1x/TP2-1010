@@ -273,11 +273,18 @@ ostream & operator<<(ostream & o, const Creature & creature)
 {
 	o << creature.obtenirNom() << " a " << creature.obtenirAttaque() << " en attaque et " << creature.obtenirDefense() << " en defense, " << endl
 		<< "Il a " << creature.obtenirPointDeVie() << "/" << creature.obtenirPointDeVieTotal() << " PV et " << creature.obtenirEnergie() << "/" << creature.obtenirEnergieTotale() << " Energie" << endl
-		<< "Il est au niveau " << creature.obtenirNiveau() << " avec " << creature.obtenirExperience() << "d'XP" << endl
+		<< "Il est au niveau " << creature.obtenirNiveau() << " avec " << creature.obtenirExperience() << " d'XP" << endl
 		<< "Il lui manque " << creature.obtenirExperienceNecessaire() - creature.obtenirExperience() << " jusqu'au prochain niveau " << endl
-		<< "Ses pouvoirs  son : ";
-	for (int i = 0; i < creature.obtenirPouvoirs().size(); i++) {
-		o << creature.obtenirPouvoirs()[i];
+		<< "Pouvoir : " << endl;
+
+	if (creature.obtenirPouvoirs().empty()) {
+		o << creature.obtenirNom()  <<  " ne connait aucun pouvoir" << endl;
+	 }
+	else {
+		for (int i = 0; i < creature.obtenirPouvoirs().size(); i++) {
+			o << *creature.obtenirPouvoirs()[i] << endl;
+		}
 	}
+	o << endl;
 	return o;
 }
